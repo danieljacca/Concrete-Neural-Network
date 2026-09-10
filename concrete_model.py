@@ -16,5 +16,16 @@ scaler=StandardScaler()
 x_train_scaled=scaler.fit_transform(x_train)
 x_test_scaled=scaler.transform(x_test)
 print(x_train_scaled[0])
-
-
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model.fit(x_train_scaled, y_train)
+y_pred=model.predict(x_test_scaled)
+print(y_pred[:5])
+print(y_test.iloc[:5].values)
+from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error
+r2=r2_score(y_test,y_pred)
+mae=mean_absolute_error(y_test,y_pred)
+rmse=mean_squared_error(y_test,y_pred)**0.5
+print("R2:", r2)
+print("MAE:", mae)
+print("RMSE:", rmse)
