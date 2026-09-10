@@ -29,3 +29,11 @@ rmse=mean_squared_error(y_test,y_pred)**0.5
 print("R2:", r2)
 print("MAE:", mae)
 print("RMSE:", rmse)
+import matplotlib.pyplot as plt
+plt.scatter(y_test, y_pred)
+plt.plot([0,80],[0,80])
+plt.plot([0,80],[0,80], color='red', linestyle='--') # add a dashed line for reference
+plt.xlabel("Actual Strength(MPa)")
+plt.ylabel("Predicted Strength(MPa)")
+plt.title("Actual vs Predicted Concrete Strength")
+plt.show()
