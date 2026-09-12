@@ -37,3 +37,24 @@ plt.xlabel("Actual Strength(MPa)")
 plt.ylabel("Predicted Strength(MPa)")
 plt.title("Actual vs Predicted Concrete Strength")
 plt.show()
+from tensorflow import keras
+from tensorflow.keras import layers
+ann_model=keras.Sequential([layers.Input(shape=(8,)),layers.Dense(16,activation="relu"),layers.Dense(8,activation="relu"),layers.Dense(1)])
+ann_model.compile(
+optimizer="adam",
+loss="mse"
+)
+history=ann_model.fit(
+x_train_scaled,
+y_train,
+epochs=100,
+batch_size=32
+)
+ann_pred=ann_model.predict(x_test_scaled)
+ann_pred=ann_pred.flatten()
+ann_r2=r2_score(y_test,ann_pred)
+ann_mae=mean_absolute_error(y_test,ann_pred)
+ann_rmse=mean_squared_error(y_test,ann_pred)**0.5
+print("ANN R2:", ann_r2)
+print("ANN MAE:", ann_mae)
+print("ANN RMSE:", ann_rmse)
